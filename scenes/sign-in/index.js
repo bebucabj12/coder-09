@@ -1,10 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
+import {signIn} from '../../api/spotify';
 
-export default function App () {
+export default function SignInScene({navigation}) {
+  const submit = async () => {
+    const {isLoggedIn} = await signIn ();
+
+    isLoggedIn && navigation.navigate ('Dashboard');
+  };
   return (
     <View style={styles.container}>
       <Text>Sign in</Text>
+      <Button
+        title={'Sign in spotify'}
+        color={'green'}
+        onPress={() => submit ()}
+      />
     </View>
   );
 }
